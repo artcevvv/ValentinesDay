@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Gallery from "./Gallery";
+import Slider from "./Slider";
 
 function TimelineImagesEl({ eventDate, event, eventDesc = "", images }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,11 +26,13 @@ function TimelineImagesEl({ eventDate, event, eventDesc = "", images }) {
             </button>
             <h2>{event}</h2>
             <p>{eventDesc}</p>
-            <div className="modal-images">
-              {/* {images.map((img, index) => (
+            <Slider images={images}/>
+
+            {/* <div className="modal-images"> */}
+            {/* {images.map((img, index) => (
               <img key={index} src={img} alt={`Event ${index}`} />
             ))} */}
-            </div>
+            {/* </div> */}
           </div>
         </div>
       )}

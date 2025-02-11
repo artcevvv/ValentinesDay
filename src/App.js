@@ -18,6 +18,9 @@ import {
   Bridge,
   Home,
 } from "./assets/text/text";
+import photo1 from './assets/images/photos/photo1.jpg'
+import photo2 from './assets/images/photos/photo2.jpg'
+
 
 function App() {
   const scrollRef = useRef(null);
@@ -63,6 +66,10 @@ function App() {
     }
   }, [isLoading]);
 
+  const images = [
+    photo1, photo2
+  ]
+
   return (
     <div className="App">
       {isLoading ? (
@@ -89,6 +96,7 @@ function App() {
                   event={"День учителя"}
                   eventDate={"5 ноября"}
                   eventDesc={TeachersDayDesc}
+                  images={images}
                 />
                 <TimelineImagesEl
                   event={"Первая долгая переписка"}

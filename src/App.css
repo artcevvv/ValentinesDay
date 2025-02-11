@@ -244,6 +244,16 @@ span.timeline__images-date {
   position: relative;
 }
 
+.modal-content p {
+  font-size: 1.2rem;
+  text-align: justify;
+}
+
+.slider__image {
+  -webkit-user-drag: none;
+  -moz-user-select: none;
+}
+
 .close-btn {
   position: absolute;
   top: 10px;
