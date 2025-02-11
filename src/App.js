@@ -17,10 +17,12 @@ import {
   Hospital,
   Bridge,
   Home,
+  FirstTimeAsLovers,
+  Zarechnoye,
+  OlderDay,
 } from "./assets/text/text";
-import photo1 from './assets/images/photos/photo1.jpg'
-import photo2 from './assets/images/photos/photo2.jpg'
-
+import photo1 from "./assets/images/photos/photo1.jpg";
+import photo2 from "./assets/images/photos/photo2.jpg";
 
 function App() {
   const scrollRef = useRef(null);
@@ -66,9 +68,7 @@ function App() {
     }
   }, [isLoading]);
 
-  const images = [
-    photo1, photo2
-  ]
+  const images = [photo1, photo2];
 
   return (
     <div className="App">
@@ -161,12 +161,28 @@ function App() {
                 />
               </div>
               <div className="timeline__element-images-container">
-                <TimelineImagesEl event={"День, что изменил мир"} eventDate={"4 июля"} eventDesc={Home} />
-                <TimelineImagesEl event={"Event"} eventDesc={"Desc"} />
-                <TimelineImagesEl event={"Event"} eventDesc={"Desc"} />
+                <TimelineImagesEl
+                  event={"День, что изменил нас"}
+                  eventDate={"4 июля"}
+                  eventDesc={Home}
+                />
+                <TimelineImagesEl
+                  event={"Впервые как пара"}
+                  eventDate={"7 июля"}
+                  eventDesc={FirstTimeAsLovers}
+                />
+                <TimelineImagesEl
+                  event={"Заречное II"}
+                  eventDate={"26 июля"}
+                  eventDesc={Zarechnoye}
+                />
               </div>
               <div className="timeline__element-images-container">
-                <TimelineImagesEl event={"Event"} eventDesc={"Desc"} />
+                <TimelineImagesEl
+                  event={"Пожилые мы"}
+                  eventDate={"27 июля"}
+                  eventDesc={OlderDay}
+                />
                 <TimelineImagesEl event={"Event"} eventDesc={"Desc"} />
                 <TimelineImagesEl event={"Event"} eventDesc={"Desc"} />
               </div>

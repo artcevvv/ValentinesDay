@@ -1,18 +1,16 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-const SwipeableSlider = ({ images }) => {
+const Slider = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [startX, setStartX] = useState(0);
   const [isSwiping, setIsSwiping] = useState(false);
   const sliderRef = useRef(null);
 
-  // Handle swipe start
   const handleSwipeStart = (e) => {
     setStartX(e.touches ? e.touches[0].clientX : e.clientX);
     setIsSwiping(true);
   };
 
-  // Handle swipe move
   const handleSwipeMove = (e) => {
     if (!isSwiping) return;
     const currentX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -70,11 +68,11 @@ const SwipeableSlider = ({ images }) => {
           transform: `translateX(${-currentIndex * 100}%)`,
         }}
       >
-        {images.map((image, index) => (
+        {images ? images.map((image, index) => (
           <div key={index} style={styles.slide}>
             <img src={image} alt={`Slide ${index + 1}`} style={styles.image} className="slider__image" />
           </div>
-        ))}
+        )) : []}
       </div>
     </div>
   );
@@ -105,4 +103,4 @@ const styles = {
   },
 };
 
-export default SwipeableSlider;
+export default Slider;

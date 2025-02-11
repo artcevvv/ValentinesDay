@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Gallery from "./Gallery";
+// import Gallery from "./Gallery";
 import Slider from "./Slider";
 
 function TimelineImagesEl({ eventDate, event, eventDesc = "", images }) {
