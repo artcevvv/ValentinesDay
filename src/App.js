@@ -1,33 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import TimelineDateEl from "./components/TimelineDateEl";
-import TimelineImagesEl from "./components/TimelineImagesEl";
-
-import {
-  TeachersDayDesc,
-  LongSpeechDayDesc,
-  NewYear2023,
-  JanToApr2024,
-  AfterGym,
-  FirstDate,
-  SecondDate,
-  ThirdDate,
-  Picnic,
-  Bracelets,
-  Hospital,
-  Bridge,
-  Home,
-  FirstTimeAsLovers,
-  Zarechnoye,
-  OlderDay,
-} from "./assets/text/text";
-import photo1 from "./assets/images/photos/photo1.jpg";
-import photo2 from "./assets/images/photos/photo2.jpg";
+import TimelineContent from "./components/TimelineContent";
 
 function App() {
   const scrollRef = useRef(null);
-  const [canScrollRight, setCanScrollRight] = useState(true);
-  const [canScrollLeft, setCanScrollLeft] = useState(true);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
   const checkScroll = () => {
@@ -40,6 +19,24 @@ function App() {
       setCanScrollRight(
         container.scrollLeft + containerWidth < scrollableWidth
       );
+    }
+  };
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({
+        left: -500, // Scroll distance
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({
+        left: 500, // Scroll distance
+        behavior: "smooth",
+      });
     }
   };
 
@@ -59,6 +56,7 @@ function App() {
       scrollableElement.addEventListener("scroll", checkScroll);
       window.addEventListener("resize", handleResize);
 
+      // Initial check for scroll positions
       checkScroll();
 
       return () => {
@@ -68,8 +66,6 @@ function App() {
     }
   }, [isLoading]);
 
-  const images = [photo1, photo2];
-
   return (
     <div className="App">
       {isLoading ? (
@@ -78,7 +74,11 @@ function App() {
         </div>
       ) : (
         <div className="timeline__main-grid">
-          {canScrollLeft && <div className="scroll-indicator left">◀</div>}
+          {canScrollLeft && (
+            <button className="scroll-indicator left" onClick={scrollLeft}>
+              ◀
+            </button>
+          )}
           <div className="timeline__main-inner-grid" ref={scrollRef}>
             <div className="timeline__elements-headings-container">
               <div className="timeline__main-line"></div>
@@ -88,112 +88,17 @@ function App() {
               <div></div>
               <div></div>
               <div></div>
-              <TimelineDateEl eventDate={"qwer"} />
+              <div></div>
+              <div></div>
+              <TimelineDateEl eventDate={"2025"} />
             </div>
-            <div className="timeline__elements-images-outer-container">
-              <div className="timeline__element-images-container">
-                <TimelineImagesEl
-                  event={"День учителя"}
-                  eventDate={"5 ноября"}
-                  eventDesc={TeachersDayDesc}
-                  images={images}
-                />
-                <TimelineImagesEl
-                  event={"Первая долгая переписка"}
-                  eventDate={"17 ноября"}
-                  eventDesc={LongSpeechDayDesc}
-                />
-                <TimelineImagesEl
-                  event={"Новый Год"}
-                  eventDate={"31 декабря"}
-                  eventDesc={NewYear2023}
-                />
-              </div>
-              <div className="timeline__element-images-container">
-                <TimelineImagesEl
-                  event={"Медленно, но верно"}
-                  eventDate={"С января по апрель"}
-                  eventDesc={JanToApr2024}
-                />
-                <TimelineImagesEl
-                  event={"Прогулки после зала"}
-                  eventDate={"18 апреля"}
-                  eventDesc={AfterGym}
-                />
-                <TimelineImagesEl
-                  event={"Прогулка по ебеням"}
-                  eventDate={"21 апреля"}
-                  eventDesc={FirstDate}
-                />
-              </div>
-              <div className="timeline__element-images-container">
-                <TimelineImagesEl
-                  event={"Парк победы, тучи и ливень"}
-                  eventDate={"28 апреля"}
-                  eventDesc={SecondDate}
-                />
-                <TimelineImagesEl
-                  event={"Собака, вода и бублики"}
-                  eventDate={"12 мая"}
-                  eventDesc={ThirdDate}
-                />
-                <TimelineImagesEl
-                  event={"Пикник"}
-                  eventDate={"18 мая"}
-                  eventDesc={Picnic}
-                />
-              </div>
-              <div className="timeline__element-images-container">
-                <TimelineImagesEl
-                  event={"Браслеты"}
-                  eventDate={"6 июня"}
-                  eventDesc={Bracelets}
-                />
-                <TimelineImagesEl
-                  event={"Больница и выписка"}
-                  eventDate={"13 июня - 20 июня"}
-                  eventDesc={Hospital}
-                />
-                <TimelineImagesEl
-                  event={"Мост"}
-                  eventDate={"3 июля"}
-                  eventDesc={Bridge}
-                />
-              </div>
-              <div className="timeline__element-images-container">
-                <TimelineImagesEl
-                  event={"День, что изменил нас"}
-                  eventDate={"4 июля"}
-                  eventDesc={Home}
-                />
-                <TimelineImagesEl
-                  event={"Впервые как пара"}
-                  eventDate={"7 июля"}
-                  eventDesc={FirstTimeAsLovers}
-                />
-                <TimelineImagesEl
-                  event={"Заречное II"}
-                  eventDate={"26 июля"}
-                  eventDesc={Zarechnoye}
-                />
-              </div>
-              <div className="timeline__element-images-container">
-                <TimelineImagesEl
-                  event={"Пожилые мы"}
-                  eventDate={"27 июля"}
-                  eventDesc={OlderDay}
-                />
-                <TimelineImagesEl event={"Event"} eventDesc={"Desc"} />
-                <TimelineImagesEl event={"Event"} eventDesc={"Desc"} />
-              </div>
-              <div className="timeline__element-images-container">
-                <TimelineImagesEl event={"Event"} eventDesc={"Desc"} />
-                <TimelineImagesEl event={"Event"} eventDesc={"Desc"} />
-                <TimelineImagesEl event={"Event"} eventDesc={"Desc"} />
-              </div>
-            </div>
+            <TimelineContent />
           </div>
-          {canScrollRight && <div className="scroll-indicator right">▶</div>}
+          {canScrollRight && (
+            <button className="scroll-indicator right" onClick={scrollRight}>
+              ▶
+            </button>
+          )}
         </div>
       )}
     </div>

@@ -1,12 +1,42 @@
 import React, { useState } from "react";
-// import Gallery from "./Gallery";
-import Slider from "./Slider";
+import confetti from "canvas-confetti"; // Импортируем библиотеку конфетти
 
-function TimelineImagesEl({ eventDate, event, eventDesc = "", images }) {
+function TimelineImagesEl({
+  eventDate,
+  event,
+  eventDesc = "",
+  images,
+  isSpecial = false,
+}) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [noButtonClicks, setNoButtonClicks] = useState(0);
 
-  const isLong = typeof eventDesc === "string" && eventDesc.length > 40;
-  const truncatedText = isLong ? eventDesc.substring(0, 40) + "..." : eventDesc;
+  const isLong = typeof eventDesc === "string" && eventDesc.length > 30;
+  const truncatedText = isLong ? eventDesc.substring(0, 30) + "..." : eventDesc;
+
+  const handleNoButtonClick = () => {
+    setNoButtonClicks((prevClicks) => prevClicks + 1);
+  };
+
+  const handleYesButtonClick = () => {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 },
+    });
+
+    setTimeout(() => {
+      window.open("https://youtu.be/6JHu3b-pbh8?t=20");
+    }, 1000);
+  };
+
+  const getButtonStyle = () => {
+    const scale = 1 - noButtonClicks * 0.2;
+    return {
+      transform: `scale(${scale})`,
+      display: noButtonClicks >= 4 ? "none" : "inline-block",
+    };
+  };
 
   return (
     <div className="timeline__images-inner">
@@ -26,13 +56,23 @@ function TimelineImagesEl({ eventDate, event, eventDesc = "", images }) {
             </button>
             <h2>{event}</h2>
             <p>{eventDesc}</p>
-            <Slider images={images}/>
-
-            {/* <div className="modal-images"> */}
-            {/* {images.map((img, index) => (
-              <img key={index} src={img} alt={`Event ${index}`} />
-            ))} */}
-            {/* </div> */}
+            {isSpecial && (
+              <div className="modal-buttons">
+                <button
+                  className="modal-button modal-button-yes"
+                  onClick={handleYesButtonClick}
+                >
+                  Да
+                </button>
+                <button
+                  className="modal-button modal-button-no"
+                  onClick={handleNoButtonClick}
+                  style={getButtonStyle()}
+                >
+                  Нет
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
