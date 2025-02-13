@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import confetti from "canvas-confetti"; // Импортируем библиотеку конфетти
+import React, { useState, useEffect, useRef } from "react";
+import confetti from "canvas-confetti"; // Import confetti library
 
 function TimelineImagesEl({
   eventDate,
@@ -10,6 +10,7 @@ function TimelineImagesEl({
 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [noButtonClicks, setNoButtonClicks] = useState(0);
+  const modalRef = useRef(null); // Ref for the modal container
 
   const isLong = typeof eventDesc === "string" && eventDesc.length > 30;
   const truncatedText = isLong ? eventDesc.substring(0, 30) + "..." : eventDesc;
@@ -26,7 +27,7 @@ function TimelineImagesEl({
     });
 
     setTimeout(() => {
-      window.open("https://youtu.be/6JHu3b-pbh8?t=20");
+      window.open("https://youtu.be/6JHu3b-pbh8?t=20", "_blank");
     }, 1000);
   };
 
@@ -37,6 +38,23 @@ function TimelineImagesEl({
       display: noButtonClicks >= 4 ? "none" : "inline-block",
     };
   };
+
+  // Close modal when clicking outside of the modal content
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        setIsModalOpen(false); // Close the modal
+      }
+    };
+
+    if (isModalOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isModalOpen]);
 
   return (
     <div className="timeline__images-inner">
@@ -50,7 +68,7 @@ function TimelineImagesEl({
       )}
       {isModalOpen && (
         <div className="modal fade-in">
-          <div className="modal-content">
+          <div className="modal-content" ref={modalRef}>
             <button className="close-btn" onClick={() => setIsModalOpen(false)}>
               ×
             </button>
