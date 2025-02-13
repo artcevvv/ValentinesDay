@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/valentinesday/static/css/main.66813f56.css",
+    "main.js": "/valentinesday/static/js/main.61519310.js",
+    "static/media/photo1.jpg": "/valentinesday/static/media/photo1.4623bf9881fbcf3012f6.jpg",
+    "static/media/photo2.jpg": "/valentinesday/static/media/photo2.016597811d16054e6a36.jpg",
+    "static/media/logo.png": "/valentinesday/static/media/logo.105a96fb9f52f021b234.png",
+    "index.html": "/valentinesday/index.html",
+    "main.66813f56.css.map": "/valentinesday/static/css/main.66813f56.css.map",
+    "main.61519310.js.map": "/valentinesday/static/js/main.61519310.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.66813f56.css",
+    "static/js/main.61519310.js"
+  ]
+}
